@@ -1,6 +1,6 @@
 // MEUS CSS
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //Meus Context
 import { AuthProvider } from './context/AuthContext';
@@ -17,12 +17,13 @@ import About from "./pages/About/About";
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Register from './pages/Register/Register';
-import Login from './pages/Login/Login'
+import Login from './pages/Login/Login';
+import CreatePost from './pages/CreatePost/CreatePost';
 
 function App() {
 
-  const [user, setUser] = useState(undefined)
-  const { auth } = useAuthentication()
+  const [user, setUser] = useState(undefined);
+  const { auth } = useAuthentication();
 
   const loadingUser = user === undefined
 
@@ -30,11 +31,11 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       setUser(user)
     })
-  }, auth)
+  }, [auth]);
 
-  if( loadingUser ) {
+  if (loadingUser) {
     return <p>Carregando....</p>
-  }
+  };
 
   return (
     <div>
@@ -43,10 +44,11 @@ function App() {
           <NavBar />
           <div className='container'>
             <Routes>
-              <Route path="/" element={ <Home /> } />
-              <Route path="/about" element={ <About /> } />
-              <Route path="/login" element={ <Login /> } />
-              <Route path="/register" element={ <Register /> } />
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/post/create" element={<CreatePost />} />
             </Routes>
           </div>
           <Footer />
@@ -54,6 +56,6 @@ function App() {
       </AuthProvider>
     </div>
   );
-}
+};
 
 export default App;
